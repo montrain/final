@@ -350,3 +350,46 @@ span{
 	font-size: 16px;
 	
 }
+
+/* ^^ */
+.portfolio-box {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    background: #f0f0f0;
+}
+
+/* 容器：隱藏溢出的圖片部分 */
+.portfolio-container {
+    overflow: hidden;
+    width: 100%;
+    height: 500px;
+    position: relative;
+    background: #333;
+}
+
+/* 圖片：初始位置與動畫 */
+.parallax-img {
+    width: 150%; /* 寬度設大一點，才有空間向左滑 */
+    height: 100%;
+    object-fit: cover;
+    
+    /* 指定動畫 */
+    animation: moveLeft linear;
+    /* 核心：將動畫進度綁定到捲動上 */
+    animation-timeline: view();
+    /* 設定動畫在進入視窗時開始，離開時結束 */
+    animation-range: entry 0% exit 100%;
+}
+
+/* 定義向左滑動的動作 */
+@keyframes moveLeft {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-20%); /* 向左位移 */
+    }
+}
