@@ -7,11 +7,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <title>Cai Yu-Cen Portfolio</title>
 </head>
 
 
 <!--HEADER SECTION -->
+
+<script>
+    window.onscroll = () => {
+        // 獲取目前的滾動高度
+        let scrollValue = window.scrollY;
+        
+        // 獲取作品集容器
+        const portfolioContainer = document.querySelector('.portfolio-container');
+        
+        // 計算移動數值 (0.5 是係數，數字越大移動越快)
+        // 減去一個數值（例如 1200）是為了讓它在滾動到 Portfolio 區域時才開始明顯移動
+        let moveX = (scrollValue - 1200) * 0.5;
+
+        // 如果滾動還沒到作品集區域，就不移動
+        if (moveX < 0) moveX = 0;
+
+        // 應用位移效果
+        portfolioContainer.style.transform = `translateX(-${moveX}px)`;
+    };
+</script>
 
 <body>
    <header class="header">
@@ -91,7 +113,7 @@
 
     <div class="portfolio-container">
         <div class="portfolio-box">
-            <img src="images/caricature 001.jpg" alt="Portfolio 1">
+            <img src="images/caricature 001.jpg"  alt="Portfolio 1">
             <div class="portfolio-layer">
                 <h4>Project Title 1</h4>
                 <p>Brief description of Project 1.</p>
@@ -118,7 +140,7 @@
         </div>
 
         <div class="portfolio-box">
-            <img src="images/caricature 004.jpg" alt="Portfolio 3">
+            <img src="images/caricature 004.jpg"  alt="Portfolio 4">
             <div class="portfolio-layer">
                 <h4>Project Title 3</h4>
                 <p>Brief description of Project 3.</p>
@@ -166,6 +188,19 @@
             &copy; 2025 Cai Yu-Cen. All rights reserved.
         </p>
     </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.to(".portfolio-container", {
+            x: "-500px", // 向左移動的距離
+            scrollTrigger: {
+                trigger: ".portfolio", // 以 .portfolio 區塊為範圍
+                start: "top bottom",    // 當作品集頂部進入螢幕底部時開始
+                end: "bottom top",      // 當作品集底部離開螢幕頂部時結束
+                scrub: 1                // 讓動畫跟隨滑鼠滾動（1秒的緩衝效果）
+            }
+        });
+    </script>
 
 </body>
 
